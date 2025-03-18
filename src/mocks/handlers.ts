@@ -2,7 +2,8 @@
 import { http, HttpResponse } from "msw";
 
 export const handlers = [
-  // Intercept "GET https://example.com/user" requests...
+  // Intercept GET "https://api.tvmaze.com/shows/82/episodes" requests...
+
   http.get("https://api.tvmaze.com/shows/82/episodes", () => {
     // ...and respond to them using this JSON response.
     return HttpResponse.json([
