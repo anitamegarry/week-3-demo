@@ -1,7 +1,14 @@
-import {describe, test,} from 'vitest';
+import { describe, test, beforeAll, afterEach, afterAll} from 'vitest';
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react'
-
 import App from './App';
+import { server } from './mocks/node'
+import { Worker } from 'cluster';
+ 
+beforeAll(() => server.listen())
+afterEach(() => server.resetHandlers())
+afterAll(() => server.close())
+
+console.log(worker.env.NODE_ENV)
 
 describe('App', () => {
 
