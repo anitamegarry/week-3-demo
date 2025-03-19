@@ -1,26 +1,24 @@
-import { useEffect, useState } from "react";
+import useFetch from "../hooks/useFetch";
 
-export default function NavBar() {
-  const [shows, setShows] = useState([]);
+export default function NavBar({ updateShow, showID }) {
+  const { data: shows } = useFetch("https://api.tvmaze.com/shows");
 
-  useEffect(() => {
-    async function fetchShows() {
-      const url = "https://api.tvmaze.com/shows";
+  const selectedShow = shows.find((show) => show.id === showID);
 
-      const response = await fetch(url);
-      const body = await response.json();
-
-      setShows(body);
-    }
-
-    fetchShows();
-  }, []);
+  function handleChange(event) {
+    updateShow(event.target.value);
+  }
 
   return (
     <>
-      <select title="select-shows" name="select-shows" id="select-shows">
+      <select
+        onChange={handleChange}
+        title="select-shows"
+        name={selectedShow?.name}
+        id="select-shows"
+      >
         {shows.map((show) => {
-          return <option value={show.name}>{show.name}</option>;
+          return <option value={show.id}>{show.name}</option>;
         })}
       </select>
     </>

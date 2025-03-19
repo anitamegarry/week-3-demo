@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App.tsx";
 
 async function enableMocking() {
+  // console.log(process.env.NODE_ENV, "process.env.NODE_ENV");
   if (process.env.NODE_ENV !== "development") {
     return;
   }

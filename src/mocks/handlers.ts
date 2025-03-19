@@ -9,11 +9,23 @@ function wait(miliseconds: number) {
 export const handlers = [
   // Intercept GET "https://api.tvmaze.com/shows/82/episodes" requests...
 
-  http.get("https://api.tvmaze.com/shows/82/episodes", () => {
+  http.get("https://api.tvmaze.com/shows/1/episodes", () => {
     return HttpResponse.json([
       {
         id: "c7b3d8e0-5e0b-4b0f-8b3a-3b9f4b3d3b3d",
-        name: "Winter is Coming",
+        name: "Pilot for Under the Dome",
+      },
+    ]);
+  }),
+  http.get("https://api.tvmaze.com/shows/2/episodes", () => {
+    return HttpResponse.json([
+      {
+        id: "c7b3d8e0-5e0b-4b0f-8b3a-3b9f4b3d3b3d",
+        name: "Pilot for the Dexter show",
+      },
+      {
+        id: "2",
+        name: "Dexter goes to Hollywood",
       },
     ]);
   }),
