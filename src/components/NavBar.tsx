@@ -1,12 +1,25 @@
 import useFetch from "../hooks/useFetch";
 
-export default function NavBar({ updateShow, showID }) {
-  const { data: shows } = useFetch("https://api.tvmaze.com/shows");
 
-  const selectedShow = shows.find((show) => show.id === showID);
+interface NavBarProps {
+  updateShow: (id: number) => void;
+  showID: number;
+  updateName: (name: string) => void
+}
 
-  function handleChange(event) {
+type Show = {
+  id: number;
+  name: string
+}
+
+export default function NavBar({ updateShow, showID, updateName }: NavBarProps) {
+  const { data: shows } = useFetch<Show[]>("https://api.tvmaze.com/shows");
+
+  const selectedShow = shows?.find((show) => show.id === showID);
+
+  function handleChange(event: React.ChangeEvent<any>) {
     updateShow(event.target.value);
+    updateName(event.target.name)
   }
 
   return (
@@ -17,7 +30,7 @@ export default function NavBar({ updateShow, showID }) {
         name={selectedShow?.name}
         id="select-shows"
       >
-        {shows.map((show) => {
+        {shows?.map((show) => {
           return <option value={show.id}>{show.name}</option>;
         })}
       </select>
